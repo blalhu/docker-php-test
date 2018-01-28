@@ -1,0 +1,7 @@
+/*
+!/.gitignore
+!/docker
+!/docker/*
+!/lib.php
+!/public
+!/public/*

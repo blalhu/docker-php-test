@@ -1,0 +1,27 @@
+version: '2.0'
+services:
+  test-php:
+    image: dev-php-72
+    tty: true
+    networks:
+      php_test_net:
+        ipv4_address: 172.4.60.2
+    volumes:
+      - '../:/home/app/docroot'
+  test-nginx:
+    image: nginx
+    networks:
+      php_test_net:
+        ipv4_address: 172.4.60.3
+    volumes:
+      - './nginx-site.conf:/etc/nginx/conf.d/nginx-site.conf'
+    ports:
+      - '127.4.60.1:8080:8000'
+networks:
+  php_test_net:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+      - subnet: 172.4.60.0/24
+        gateway: 172.4.60.1
